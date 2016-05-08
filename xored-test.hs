@@ -16,5 +16,13 @@ mainLoop = do
     input<-getLine
     --let result = evalStr input
     let result = strToCells input
-    putStrLn $ show result
+    print result
     mainLoop
+
+readToCells::IO [[Cell]]
+readToCells = do
+  contents <-readFile "input.txt"
+  let fileLines = lines contents
+  let cells=map strToCells fileLines
+  return cells
+  --return fileLines
