@@ -14,6 +14,7 @@ mainLoop = do
   if done then putStrLn "bye"
   else do
     input<-getLine
-    let result = evalStr input
+    --let result = evalStr input
+    let result = strToCells input
     putStrLn $ show result
     mainLoop

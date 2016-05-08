@@ -1,6 +1,7 @@
 {- LANGUAGE OverloadedStrings -}
 module Cells where
 import Text.Regex
+import Text.Regex.Posix
 
 data Cell = IntegerCell Integer | StringCell String | ExprCell String deriving (Show)
 
@@ -12,3 +13,6 @@ strToCell input = case (head input) of
   '\'' -> StringCell (tail input)
   '=' -> ExprCell (tail input)
   otherwise -> IntegerCell (read input::Integer)
+
+findDependency::String->[String]
+findDependency input= getAllTextMatches $ input =~ "([A-Z][0-9]+)"::[String]

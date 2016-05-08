@@ -1,6 +1,13 @@
 {- LANGUAGE OverloadedStrings -}
 module Eval where
 import Text.Regex
+import Cells
+
+evalCell::Cell->String
+evalCell c = case c of
+  IntegerCell i -> show i
+  StringCell s -> s
+  ExprCell e -> show $ evalStr e
 
 evalStr::String->Maybe Integer
 evalStr inpStr = case pattern inpStr of
