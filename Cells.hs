@@ -35,3 +35,11 @@ cellIndex input = do
 letterIndex::Char->Integer
 letterIndex input =
   toInteger $ fromJust $ elemIndex input ['A'..'Z']
+
+mapInd f l = zipWith f l [0..]
+
+{- buildDep::[[Cell]]->[[String]]
+buildDep cells = mapInd (\r i -> buildDepRow r) cells
+
+buildDepRow::[Cell]->[String]
+buildDepRow cells = mapInd (\e i-> show i ++ show e) cells -}
