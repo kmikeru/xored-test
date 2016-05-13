@@ -6,6 +6,21 @@ import Data.List
 import Data.Maybe
 
 data Cell = IntegerCell Integer | StringCell String | ExprCell String deriving (Show)
+data Result = IntResult Integer | ErrorResult String | StringResult String deriving (Show)
+
+showResults::[[Result]]->IO()
+showResults results=
+  mapM_ (\r-> putStrLn $ showResultRow r) results
+
+showResultRow::[Result]->String
+showResultRow row =
+  intercalate "\t" s ::String
+  where s=map (\e->  showResult e) row
+
+showResult::Result->String
+showResult r=case r of
+  IntResult i->show i
+  StringResult s->s
 
 strToCells::String->[Cell]
 strToCells input = map strToCell (splitRegex (mkRegex "\t") input)
