@@ -36,13 +36,15 @@ text ::='\'' {printable_character}
 3	4
 12	=C2	3	'Sample
 =A1+B1*C1/5	=A2*B1	=B3-C3	'Spread
-'Test	=4-3	5	'Sheet```
+'Test	=4-3	5	'Sheet
+```
 
 Ожидаемый вывод:
 ```
 12  -4  3 Sample
 4 -16 -4  Spread
-Test  1 5 Sheet```
+Test  1 5 Sheet
+```
 
 ## Указания по решению
 
