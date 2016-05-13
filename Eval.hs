@@ -20,20 +20,21 @@ evalCell cells cell=case cell of
 eval1::[[Cell]]->[Item]->Integer
 eval1 cells input=case input of
   [] -> 0
-  [IntOperand i]-> trace ("int:"++show i)
+  [IntOperand i]-> --trace ("int:"++show i)
     i
-  [RefOperand s]-> trace ("RefOperand "++s)
+  [RefOperand s]-> --trace ("RefOperand "++s)
     eval1 cells (resolve cells (RefOperand s))
-  (IntOperand i:Operation j:IntOperand k:[])-> trace ("all int end:"++(show i)++j++(show k))
+  (IntOperand i:Operation j:IntOperand k:[])-> --trace ("all int end:"++(show i)++j++(show k))
     calc
     where calc = op j i k
-  (IntOperand i:Operation j:IntOperand k:rest)-> trace ("all int:"++(show i)++j++(show k)++" rest:"++(show rest))
+  (IntOperand i:Operation j:IntOperand k:rest)-> --trace ("all int:"++(show i)++j++(show k)++" rest:"++(show rest))
     eval1 cells  ([IntOperand calc]++rest)
     where calc = op j i k
-  (op1:Operation j:op2:rest)-> trace ("last:"++(show op1)++j++(show op2)++" rest:"++(show rest))
+  (op1:Operation j:op2:rest)-> --trace ("last:"++(show op1)++j++(show op2)++" rest:"++(show rest))
     eval1 cells (res1 ++ [Operation j] ++ res2 ++ rest)
     where res1=resolve cells op1
-          res2=resolve cells op2
+          res2=[IntOperand (eval1 cells [op2])]
+          --res2=resolve cells op2
 
 resolve::[[Cell]]->Item->[Item]
 resolve cells input = case input of
