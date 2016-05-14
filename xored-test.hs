@@ -7,7 +7,11 @@ import Debug.Trace()
 import Eval
 import Cells
 
-main = mainLoop
+main = do
+  cells <- readToCells
+  let result = evalAll cells
+  showResults result
+
 
 mainLoop = do
   done <- isEOF
@@ -21,7 +25,8 @@ mainLoop = do
 
 readToCells::IO [[Cell]]
 readToCells = do
-  contents <-readFile "input.txt"
+  --contents <-readFile "input.txt"
+  contents<-getContents
   let fileLines = lines contents
   let cells=map strToCells fileLines
   return cells
